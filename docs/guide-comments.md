@@ -39,6 +39,52 @@ You need to provide a shortname which you can find on [Disqus](https://disqus.co
 
 Read more: [Disqus](https://disqus.com/)
 
+## Vssue
+
+[Vssue](https://vssue.js.org/guide/) is a Vue component / plugin, which can enable comments for your static pages. It stores comments in the issue system of code hosting platforms (e.g. Github, Gitlab, Bitbucket, Gitee, etc.)
+
+#### Choose a platform and set up OAuth App
+
+First, you should [choose a platform](https://vssue.js.org/guide/supported-platforms.html) to use and follow the guide to set up OAuth App. Here we take [GitHub](https://vssue.js.org/guide/github.html) for example.
+
+#### Install vssue
+
+Install Vssue and API package that you want to use:
+
+```sh
+npm install vssue @vssue/api-github-v3
+```
+
+#### Import in gridsome
+
+Import Vssue in your `main.js`:
+
+> See [Vssue docs](https://vssue.js.org/guide/getting-started.html) for how to set the options
+
+```js
+import Vssue from 'vssue';
+import GithubV3 from '@vssue/api-github-v3';
+import 'vssue/dist/vssue.css'
+
+export default function (Vue) {
+  Vue.use(Vssue, {
+    api: GithubV3,
+    owner: 'your-github-username',
+    repo: 'your-github-repository',
+    clientId: 'xxx',
+    clientSecret: 'xxx',
+  })
+}
+```
+
+#### Use Vssue component in pages
+
+Now you are free to use the `<Vssue />` component anywhere you want, simply use it like this:
+
+```vue
+<Vssue :title="$page.post.title" />
+```
+
 ## Staticman
 Staticman is an application that you connect to your Github repository which commits comments or any other type of user input to your site that you have configured.
 Read more: [Staticman](https://staticman.net/)
